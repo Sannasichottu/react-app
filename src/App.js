@@ -25,7 +25,7 @@ import { useHistory } from 'react-router-dom';
 import { Switch, Route, Redirect, useParams,} from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-//import {EditMovie} from "./EditMovie";
+import {BasicForm} from "./BasicForm";
 
 
 function App() {
@@ -71,6 +71,8 @@ function App() {
           Color Game</Button>
           <Button variant="text" color="inherit" onClick={()=> history.push('/tic-tac-toe')}>
           Tic-Tac-Toe Game</Button>
+          <Button variant="text" color="inherit" onClick={()=> history.push('/form')}>
+          BasicForm </Button>
           <Button 
           startIcon={theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           style ={{ marginLeft: "auto"}} 
@@ -104,6 +106,9 @@ function App() {
         <Route path="/tic-tac-toe">
           <TicTacToe />
         </Route>
+        <Route path="/form">
+          <BasicForm />
+        </Route>
         <Route path="**">
           <NotFound />
         </Route>    
@@ -112,6 +117,8 @@ function App() {
   </ Paper >
   </ThemeProvider>
   );}
+
+  
     
   function TicTacToe(){
       const [board, setBoard] =
