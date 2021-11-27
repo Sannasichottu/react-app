@@ -195,7 +195,7 @@ function App() {
       {method:"GET",})
       .then((data)=> data.json())
       .then((mv)=> setMovie(mv));
-    },[]);  
+    });  
 
     const styles = {
       Color: movie.rating < 8 ? "crimson" : "green",
@@ -275,7 +275,7 @@ function App() {
         setSummary(summary);
         setTrailer(trailer);
       });
-    },[]);
+    });
     
 
     return(  <div className="add-movie-form">
