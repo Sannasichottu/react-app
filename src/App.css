@@ -1,0 +1,142 @@
+
+
+.user-name{
+  font-family: 'Poppins', sans-serif;
+}
+
+.user-pic{
+  height:200px;
+  width: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.movie-container{
+  width: 340px;
+  height: min-content;
+}
+
+.movie-poster {
+  height: 500px;
+  width: 340px;
+  object-fit: cover;
+}
+
+.movie-specs{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movie-rating{
+  font-size: 18px;
+}
+
+.movie-name{
+  font-size: 24px;
+  margin: 0;
+  max-width: 75%;
+}
+
+.movie-summary{
+  margin-top: 0px;
+}
+
+body{
+  margin: 20px;
+  background-color: rgba(255, 182, 193, 0.493);
+  
+}
+
+.movie-list{
+  display: flex;
+  gap:24px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.counter-countainer{
+  display: flex;
+  gap: 10px;
+  
+}
+.likes-dislikes{
+  font-size: 20px;
+}
+
+.movie-show-button{
+  margin-bottom: 10px;
+  font-size: 18px;
+  
+}
+
+.add-color-form{
+  display: flex;
+  gap: 11px;
+  flex-direction: column;
+  width: 255px;
+}
+
+.add-movie-form{
+  margin: 20px;
+  display: flex;
+  gap: 11px;
+  flex-direction: column;
+}
+
+nav{
+  font-size: 24px;
+  display: flex;
+  gap: 24px;
+  margin: 20px;
+}
+h2{
+  font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+  color:#d83f53f5;
+  
+}
+
+.not-found-container{
+  width: 100%;
+  object-fit: cover;
+}
+
+.not-found-container{
+  padding-top: 1rem;
+  text-align:center;
+  color:rgb(192, 3, 59);
+}
+
+.movie-detail-container{
+  padding: 24px;
+  max-width: 50rem;
+}
+
+.game-box{
+  background-color: white;
+  color: black;
+  height: 8rem;
+  width:8rem;
+  font-size: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.board{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: min-content;
+}
+
+.full-game{
+  display: flex;
+  flex-direction:column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+}
