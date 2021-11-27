@@ -71,7 +71,7 @@
 
   //App.js 
 
-  {/*  const INITIAL_MOVIES = [
+    const INITIAL_MOVIES = [
    {
      name:"Master",
      poster:"https://m.media-amazon.com/images/M/MV5BNmU1OTYzYzAtMDcyOS00MDI0LTg2ZmQtYTEyMDdmMmQ0MjY5XkEyXkFqcGdeQXVyOTk3NTc2MzE@._V1_FMjpg_UX1000_.jpg",
@@ -128,7 +128,69 @@
     summary:"A criminal mastermind who goes by 'The Professor' has a plan to pull off the biggest heist in recorded history -- to print billions of euros in the Royal Mint of Spain. To help him carry out the ambitious plan, he recruits eight people with certain abilities and who have nothing to lose. The group of thieves take hostages to aid in their negotiations with the authorities, who strategize to come up with a way to capture The Professor. As more time elapses, the robbers prepare for a showdown with the police.",
     trailer:"https://www.youtube.com/embed/DqZHAHwTwKY",
   },
-  ]; */}
+  ]; 
 
-  
- 
+
+
+--- //formik ah step by step ah aply pandrathu
+
+const validateForm =(values) => {
+    const errors ={}
+    console.log("validateForm", values)
+    
+    if(values.email.length < 5){
+        errors.email= "Please provide a longer email"
+    }else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      ) {
+        errors.email = 'Invalid email address';
+      }
+    //min 8 chars
+    if(values.password.length < 8){
+        errors.password= "Please provide a longer password"
+    }
+    else if(values.password.length > 12){
+        errors.password= "Please provide a shorter password"
+    }
+    console.log(errors)
+    return errors;
+}; 
+
+export function BasicForm(){
+    const formik = useFormik({
+        initialValues:{email:"", password:""},
+        validate: validateForm,
+        onSubmit:(values) => {
+            console.log("onSubmit",values);
+        },
+    });
+    return(
+        <form onSubmit={formik.handleSubmit}>
+        <input 
+            id="email"
+            name="email"
+            value={formik.values.email} 
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            type="email" 
+            placeholder="Enter your email"
+        />
+        {formik.errors.email && 
+        formik.touched.email && 
+        formik.errors.email}
+        <input
+            id="password"
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            type="password" 
+            placeholder="Enter your password" 
+        />
+        {formik.errors.password && 
+        formik.touched.password && 
+        formik.errors.password}
+        <button type="submit">Submit</button>
+    </form>
+    );
+  } -----
