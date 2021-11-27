@@ -45,13 +45,13 @@ function App() {
  
   
 
-  //useEffect(()=>{
-  //async function getMovies(){
-  //    const data = await fetch("https://619ba1512782760017445704.mockapi.io/movies");
-  //  const mvs = await data.json();
-  //     setMovies(mvs);
-  //  }getMovies();
-  //},[]);
+  useEffect(()=>{
+  async function getMovies(){
+      const data = await fetch("https:619ba1512782760017445704.mockapi.io/movies");
+    const mvs = await data.json();
+       setMovies(mvs);
+    }getMovies();
+  },[]);
 
   return (
     <ThemeProvider theme={theme} >
@@ -63,7 +63,6 @@ function App() {
         <Button variant="text" color="inherit" onClick={() => history.push('/')}>
           Home
         </Button>
-
         <Button variant="text" color="inherit" onClick={()=> history.push('/movies')} >
           Movies</Button>
         <Button variant="text" color="inherit" onClick={()=> history.push('/add-movies')} >
@@ -79,7 +78,6 @@ function App() {
           {mode==="light" ? "dark" : "light"} Mode</Button>
         </Toolbar>
       </AppBar>
-      
      
       <Switch>
       <Route exact path="/">
@@ -89,7 +87,7 @@ function App() {
           <Redirect to ="/movies" />
         </Route>
         <Route path="/movies/edit/:id">
-          <Editmovie  /></Route>
+          <Editmovie movies={movies} setMovies={setMovies}  /></Route>
         <Route path="/movies/:id">
         <MovieDetails movies={movies} />
         </Route>
@@ -108,25 +106,22 @@ function App() {
         </Route>
         <Route path="**">
           <NotFound />
-        </Route>
-        
+        </Route>    
       </Switch>
   </div>
   </ Paper >
   </ThemeProvider>
   );}
-    function TicTacToe(){
+    
+  function TicTacToe(){
       const [board, setBoard] =
        useState([
         null,null,null,
         null,null,null,
         null,null,null,
       ]);
-      useState([0,1,2,3,4,5,6,7,8]);
-      
-
+      useState([0,1,2,3,4,5,6,7,8]); 
       const [isXTurn, setIsXTurn]=useState(true);
-
       const desideWinner = (board)=> {
         const lines=[
           [0, 1, 2],
@@ -150,7 +145,6 @@ function App() {
       };
 
       const winner = desideWinner(board);
-
       const handleClick=(index)=>{
         //console.log(index);
         //console.log(isXTurn ? 'X' : 'O');
@@ -161,11 +155,8 @@ function App() {
         setIsXTurn(!isXTurn);
         }
       };
-      
-      
-      return(
-        <div className="full-game" >
-          
+            return(
+        <div className="full-game" >    
           <div className="board">
           {board.map((val ,index)=>(
             <GameBox val={val} onPlayerClick={()=>handleClick(index)} />
@@ -175,7 +166,6 @@ function App() {
         </div>
       );
     }
-
     function GameBox({onPlayerClick, val}){
       //const [val,setVal]=useState(null);
       const styles={color: val === "X" ? "green" : "red"};
@@ -192,14 +182,13 @@ function App() {
     const {id} = useParams();
     //const movie = movies[id];
     console.log("The id is", id);
-  
     const [movie, setMovie] = useState({}); 
     useEffect(()=>{
       fetch(`https://619ba1512782760017445704.mockapi.io/movies/${id}`,
       {method:"GET",})
       .then((data)=> data.json())
       .then((mv)=> setMovie(mv));
-    },[]); //<- },[]); ipdi add pannanum 
+    },[]);  
 
     const styles = {
       Color: movie.rating < 8 ? "crimson" : "green",
@@ -214,9 +203,7 @@ function App() {
       frameborder="0" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       
-
-      <div className="movie-container">
-        
+    <div className="movie-container">  
     <div className="movie-specs">
     <h3 className="movie-name">{movie.name} </h3>
     <p className="movie-rating" style={styles} >⭐ {movie.rating} </p>
@@ -231,7 +218,7 @@ function App() {
   function NotFound(){
     return(
     <div className="not-found-container">Not Found 404
-      <img className="not-found-container" src="https://kfg6bckb.media.zestyio.com/yalantis-interactive-404.gif" alt=" " />
+    <img className="not-found-container" src="https://kfg6bckb.media.zestyio.com/yalantis-interactive-404.gif" alt=" " />
     </div>)
   }
 
@@ -244,14 +231,13 @@ function App() {
     const history =useHistory();
     //const movie=movies[id];
     //console.log(movie);
-   const [name, setName] = useState(" ");
+    const [name, setName] = useState(" ");
     const [poster, setPoster] = useState(" ");
     const [rating, setRating] = useState(" ");
     const [summary, setSummary] = useState(" ");
     const [trailer, setTrailer] = useState(" ");
   
     const editMovie = () => {
-    
       const updatedMovie={
         name,
         poster,
@@ -260,23 +246,30 @@ function App() {
         trailer,
       };
       console.log(updatedMovie);
-      //copy the movie list & add the new movis
-      //setMovies([ ...movies, updatedMovie]);
-
-    //Replace the element in the updatedmovie list-[copy]
     const copyMovieList=[...movies];
     copyMovieList[id]= updatedMovie;
     setMovies(copyMovieList);
-    history.push('/movies')
-
-    fetch("https:619ba1512782760017445704.mockapi.io/movies/",
-    { method:"POST",
+    fetch(`https://619ba1512782760017445704.mockapi.io/movies/${id}`,
+    { method:"PUT",
       body: JSON.stringify(updatedMovie),
       headers:{'Content-Type': 'application/json'  }
     }).then(()=>history.push("/movies"));
-    
-
     };
+    
+    useEffect(()=>{
+      fetch(`https://619ba1512782760017445704.mockapi.io/movies/${id}`,{
+        method:"GET",
+      })
+      .then((data)=>data.json())
+      .then(({name,poster,summary,trailer,rating})=>{
+        setName(name);
+        setPoster(poster);
+        setRating(rating);
+        setSummary(summary);
+        setTrailer(trailer);
+      });
+    },[]);
+    
 
     return(  <div className="add-movie-form">
       <TextField 
@@ -314,11 +307,7 @@ function App() {
        );
   }
 
-  
-  
-
   function AddColor (){
-
     const [color ,setColor] = useState(" ");
     const styles= {backgroundColor: color}
     //const colors =["teal","orange", "blue",];
@@ -335,8 +324,7 @@ function App() {
         
         {colors.map((clr, index)=>(
           <ColorBox key={index} color={clr} />
-        ))}
-        
+        ))}  
       </div>
     )
   }
@@ -346,23 +334,17 @@ function App() {
     }
     return <div style={styles}></div>
   }
-
   //likes & dislikes
-
-
-//MOvie-list
+  //MOvie-list
 function MovieList() {
   const [movies, setMovies] = useState([]);
-
   const getMovies =() =>{
     fetch("https:619ba1512782760017445704.mockapi.io/movies/")
     .then((data)=> data.json())
     .then((mvs)=> setMovies(mvs));
-
   }
     
   useEffect(getMovies,[]);
-
   //After delete refresh
   const deleteMovie = (id) => {
     fetch(
@@ -375,7 +357,6 @@ function MovieList() {
   const history = useHistory();
   return(
   <section className="movie-list">
-
     {movies.map(({name,rating,summary,poster,id} ,index)=>(
       <Movie
         key={id} 
@@ -394,8 +375,7 @@ function MovieList() {
         <DeleteIcon />
         </IconButton>
     }
-     
-     
+      
     editButton={
       <IconButton 
       style={{marginLeft:"auto"}}
@@ -413,9 +393,7 @@ function MovieList() {
   }
   
 //Movie view details
-
 function Movie({name,rating,summary,poster,id, deleteButton,editButton}) {
-
   const [show, setShow] = useState(true)
   const history = useHistory();
   
@@ -425,8 +403,6 @@ function Movie({name,rating,summary,poster,id, deleteButton,editButton}) {
     fontWeight:"bold", };
   //description Hide &  Show
   //const summaryStyles = {display: show ? "block" : "none" ,};
-
-
   return (
   <Card className="movie-container">
     <img 
@@ -454,9 +430,7 @@ function Movie({name,rating,summary,poster,id, deleteButton,editButton}) {
     <p className="movie-rating" style ={styles} >⭐ {rating} </p>
     </div>
 
-    
-    {show ? <p className="movie-summary">{summary}</p> : ""}
-    
+    {show ? <p className="movie-summary">{summary}</p> : ""}    
     {/*<p style={summaryStyles} className="movie-summary"> {summary} </p> */} 
     <CardActions>
     <Counter /> {editButton} {deleteButton}
@@ -467,14 +441,6 @@ function Movie({name,rating,summary,poster,id, deleteButton,editButton}) {
     }   
 
 
-    
-   
-
-
-
 export default App;
-
-
-
  /*jsx - Javascript xml*/
 
