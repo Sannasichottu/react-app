@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "alefragnani.project-manager"
+        "alefragnani.project-manager",
+        "ziyasal.vscode-open-in-github"
     ]
 }
