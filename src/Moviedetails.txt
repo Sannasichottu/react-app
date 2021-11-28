@@ -194,3 +194,100 @@ export function BasicForm(){
     </form>
     );
   } -----
+
+
+  ------function AddProduct(){
+    const validateForm = (values)=>{
+        console.log("validate",values["productName"]);
+    };
+    const formik = useFormik({
+        initialValues:{
+            productName:"",
+            productImage:"",
+            productPrice:0,
+            productStock:0,
+            productRiew:0.0,
+        },
+        validate:validateForm,
+        onSubmit:(values)=>{
+            console.log("onSubmit",values);
+        },
+    });
+    return(
+        <form onSubmit={formik.handleSubmit}>
+            <h1>Add product detail</h1>
+            <FormGroup>
+                <label>Product Name:</label>
+                <Input 
+                id="pName"
+                name="prodName"
+                values={formik.values.productName}
+                onChange={formik.handleChange}
+                pplaceholder="Enter Product Name"
+                type="text"
+                />
+            </FormGroup>
+            <FormGroup>
+                <label>Product Image:</label>
+                <Input 
+                id="pImage"
+                name="prodImage"
+                values={formik.values.productImage}
+                onChange={formik.handleChange}
+                pplaceholder="Enter Product Image URL"
+                type="text"
+                />
+            </FormGroup>
+            <FormGroup>
+                <label>Product Price:</label>
+                <Input 
+                id="pPrice"
+                name="prodPrice"
+                values={formik.values.productPrice}
+                onChange={formik.handleChange}
+                pplaceholder="Enter Product Price"
+                type="number"
+                />
+            </FormGroup>
+            <FormGroup>
+                <label>Available Stock:</label>
+                <Input 
+                id="pStock"
+                name="prodStock"
+                values={formik.values.productStock}
+                onChange={formik.handleChange}
+                pplaceholder="Enter Product Stock"
+                type="number"
+                />
+            </FormGroup>
+            <FormGroup>
+                <label>Product Rating:</label>
+                <Input 
+                id="pRating"
+                name="prodRating"
+                values={formik.values.productRating}
+                onChange={formik.handleChange}
+                pplaceholder="Enter Product Rating"
+                type="number"
+                />
+            </FormGroup>
+            <Button type="submit" color="success">
+                Add Product
+            </Button>
+        </form>
+    );
+} ----------------
+
+--- {/* const formValidationSchema = yup.object({
+    email:yup
+    .string()
+    .min(5,"Need a bigger email 😜")
+    .required("Why not fill this email? 😠")
+    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i ,"Pattern Not Match  🧐"),
+    password:yup
+    .string()
+    .min(8,"Need a longer password 😜")
+    .max(12,"Too much password 😂")
+    .required("Why not fill this password? 😠"),
+}); */}
+

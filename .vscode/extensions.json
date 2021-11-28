@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "alefragnani.project-manager",
-        "ziyasal.vscode-open-in-github"
+        "ziyasal.vscode-open-in-github",
+        "donjayamanne.git-extension-pack"
     ]
 }

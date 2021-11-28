@@ -1,3 +1,4 @@
+//import { FormGroup } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from 'yup';
 
@@ -6,8 +7,13 @@ import * as yup from 'yup';
       email:yup
       .string()
       .min(5,"Need a bigger email 😜")
-      .required("Why not fill this email? 😠").matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i ,"Pattern Not Match  🧐"),
-      password:yup.string().min(8,"Need a longer password 😜").max(12,"Too much password 😂").required("Why not fill this password? 😠"),
+      .required("Why not fill this email? 😠")
+      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i ,"Pattern Not Match  🧐"),
+      password:yup
+      .string()
+      .min(8,"Need a longer password 😜")
+      .max(12,"Too much password 😂")
+      .required("Why not fill this password? 😠"),
   });
 
   export function BasicForm(){
@@ -50,4 +56,5 @@ import * as yup from 'yup';
     </form>
     );
   }
+
 
